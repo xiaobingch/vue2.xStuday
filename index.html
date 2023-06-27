@@ -2,18 +2,19 @@
 <html lang="en">  
 <head>
     <meata charset="UTF-8">
-    <title>计算属性和侦听起</title>
+    <title>v-if,v-show,v-for</title>
     <script src="./vue.js"></script>
 </head>
 <body>
 
     <div id= "root">
         
-        <input v-model="firstName">
-        <input v-model="lastName">
-        <div>{{fullName}}</div>
-        <div>{{count}}</div>
-    
+        <div v-show="show">hell world</div>
+        <button @click="handleClick">toggle</button>
+        <ul>
+            <li v-for="item, index of list" :key="index">{{item}}</li>
+
+        </ul>
     </div>
 
     <script>
@@ -21,22 +22,15 @@
 
             el: "#root",
             data: {
-                firstName: '',
-                lastName: '',
-                count: 0,
+                show: true,
+                list: [1,2,3]
             },
-            computed: {
-                fullName: function() {
-                    return this.firstName + ' ' + this.lastName
+            methods: {
+                handleClick: function(){
+                    this.show = !this.show
                 }
-            },
-            watch: {
-                fullName: function(){
-                    this.count ++
-                },
-               
             }
-        
+            
         })
 
     </script>
