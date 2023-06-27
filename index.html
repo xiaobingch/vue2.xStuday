@@ -2,7 +2,7 @@
 <html lang="en">  
 <head>
     <meata charset="UTF-8">
-    <title>v-if,v-show,v-for</title>
+    <title>TodoList</title>
     <script src="./vue.js"></script>
 </head>
 <body>
@@ -13,17 +13,35 @@
             <button @click="handleClick">提交</button>
         </div>
         <ul>
-            <li v-for="(item, index) of list" :ken="index">
-                {{item}}
-            </li>
+           <todo-item
+           v-for="(item, index) of list"
+           :key= "index"
+           :content="item"
+           ></todo-item>
 
         </ul>
     </div>
 
     <script>
+
+
+
+        Vue.component('todo-item', {
+            props: ['content'],
+            template: '<li>{{content}}</li>'
+        })
+
+        //局部组件
+        // var  TodoItem = {
+        //     template: '<li>item2</li>'
+        // }
+
         new Vue({
 
             el: "#root",
+            // components: {
+            //     'todo-item' : TodoItem
+            // },
             data: {
                 inputValue: '',
                 list: [],
