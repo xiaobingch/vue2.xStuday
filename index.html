@@ -7,17 +7,22 @@
 </head>
 <body>
 
-    <div id= "root"></div>
+    <div id= "root">
+        <div v-text="content" v-on:click="handleClick"></div>
+    </div>
 
-    <!-- 挂载点，模版，实例之间的关系 -->
+    <!-- vue实例中的数据、事件、方法 -->
     <script>
         new Vue({
 
             el: "#root",
-            template: '<h1>你好{{msg}}</h1>',
             data: {
-                msg: "hello word!"
-
+                content: "hello1"
+            },
+            methods: {
+                handleClick: function(){
+                    this.content = "你好"
+                }
             }
         })
 
