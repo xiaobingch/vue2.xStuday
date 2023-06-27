@@ -2,28 +2,26 @@
 <html lang="en">  
 <head>
     <meata charset="UTF-8">
-    <title>Vue入门</title>
+    <title>属性绑定和双向数据绑定</title>
     <script src="./vue.js"></script>
 </head>
 <body>
 
     <div id= "root">
-        <div v-text="content" v-on:click="handleClick"></div>
+        <div v-bind:title="'xiaobing ' + title">hello world</div>
+        <input v-model="content">
+        <div>{{content}}</div>
     </div>
 
-    <!-- vue实例中的数据、事件、方法 -->
     <script>
         new Vue({
 
             el: "#root",
             data: {
-                content: "hello1"
+                title: "this is title",
+                content: "this is content"
             },
-            methods: {
-                handleClick: function(){
-                    this.content = "你好"
-                }
-            }
+        
         })
 
     </script>
