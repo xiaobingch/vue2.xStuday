@@ -2,7 +2,7 @@
 <html lang="en">  
 <head>
     <meata charset="UTF-8">
-    <title>TodoList</title>
+    <title>Todolist删除功能</title>
     <script src="./vue.js"></script>
 </head>
 <body>
@@ -10,13 +10,16 @@
     <div id= "root">
         <div>
             <input v-model = "inputValue"/>
-            <button @click="handleClick">提交</button>
+            <button @click="handleSubmit">提交</button>
         </div>
         <ul>
+            <!-- 父组件通过属性向子组件传递数据 -->
            <todo-item
            v-for="(item, index) of list"
            :key= "index"
            :content="item"
+           :index="index"
+           @delete="handleDelete"
            ></todo-item>
 
         </ul>
@@ -24,32 +27,34 @@
 
     <script>
 
-
-
         Vue.component('todo-item', {
-            props: ['content'],
-            template: '<li>{{content}}</li>'
+            //1接受父组件下标
+            props: ['content','index'],
+            template: '<li @click="handleClick">{{content}}</li>',
+            methods: {
+                handleClick: function(){
+                    //2触发事件，携带下标
+                    //3父组件监听
+                   this.$emit('delete',this.index);
+
+                }
+            }
         })
 
-        //局部组件
-        // var  TodoItem = {
-        //     template: '<li>item2</li>'
-        // }
-
         new Vue({
-
             el: "#root",
-            // components: {
-            //     'todo-item' : TodoItem
-            // },
             data: {
                 inputValue: '',
                 list: [],
             },
             methods: {
-                handleClick: function(){
+                handleSubmit: function(){
                     this.list.push(this.inputValue)
                     this.inputValue = '';
+                },
+                handleDelete: function(index){
+                    //4删除index位置开始的一个元素
+                    this.list.splice(index,1);
                 }
             }
             
