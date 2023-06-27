@@ -7,15 +7,17 @@
 </head>
 <body>
 
-    <div id= "root">{{msg}}</div>
+    <div id= "root"></div>
 
-
+    <!-- 挂载点，模版，实例之间的关系 -->
     <script>
         new Vue({
 
             el: "#root",
+            template: '<h1>你好{{msg}}</h1>',
             data: {
                 msg: "hello word!"
+
             }
         })
 
