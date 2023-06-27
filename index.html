@@ -2,15 +2,18 @@
 <html lang="en">  
 <head>
     <meata charset="UTF-8">
-    <title>属性绑定和双向数据绑定</title>
+    <title>计算属性和侦听起</title>
     <script src="./vue.js"></script>
 </head>
 <body>
 
     <div id= "root">
-        <div v-bind:title="'xiaobing ' + title">hello world</div>
-        <input v-model="content">
-        <div>{{content}}</div>
+        
+        <input v-model="firstName">
+        <input v-model="lastName">
+        <div>{{fullName}}</div>
+        <div>{{count}}</div>
+    
     </div>
 
     <script>
@@ -18,9 +21,21 @@
 
             el: "#root",
             data: {
-                title: "this is title",
-                content: "this is content"
+                firstName: '',
+                lastName: '',
+                count: 0,
             },
+            computed: {
+                fullName: function() {
+                    return this.firstName + ' ' + this.lastName
+                }
+            },
+            watch: {
+                fullName: function(){
+                    this.count ++
+                },
+               
+            }
         
         })
 
